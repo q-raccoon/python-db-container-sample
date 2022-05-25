@@ -1,0 +1,39 @@
+version: '3'
+
+services:
+  db.maria.com:
+    container_name: db.maria.com
+    image: mariadb:10
+    ports:
+      - 3306:3306
+    volumes:
+      - ./mariadb/conf.d:/etc/mysql/conf.d
+      - ./mariadb/data:/var/lib/mysql
+      - ./mariadb/initdb.d:/docker-entrypoint-initdb.d
+    env_file: ./mariadb/.env
+    environment:
+      TZ: Asia/Seoul
+    restart: always
+
+  db.mongodb.com:
+    container_name: db.mongodb.com
+    image: mongo
+    ports:
+      - 27017:27017
+    volumes:
+      - ./mongodb/data:/data/db
+    env_file: ./mongodb/.env
+    restart: always
+    
+  api.fastapi.com:
+    container_name: api.fastapi.com
+    build: 
+      context: ./api
+      # dockerfile: dockerfile 만약 dockerfile 이름이 다르다면 여기서 명시한다.
+    ports: 
+      - 4000:80
+    restart: always
+    env_file: ./api/.product.env
+    depends_on:
+      - db.maria.com
+      - db.mongodb.com
