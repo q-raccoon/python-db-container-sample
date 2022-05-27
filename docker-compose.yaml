@@ -37,3 +37,15 @@ services:
     depends_on:
       - db.maria.com
       - db.mongodb.com
+
+  front.react.com:
+    container_name: front.react.com
+    build: 
+      context: ./front
+      # dockerfile: dockerfile 만약 dockerfile 이름이 다르다면 여기서 명시한다.
+    ports:
+      - 80:80
+    restart: always
+    env_file: ./front/.product.env
+    depends_on:
+      - api.fastapi.com
