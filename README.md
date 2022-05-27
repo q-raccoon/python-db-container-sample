@@ -1,23 +1,33 @@
 # 컨테이너 기반 FastAPI 디비연동
 
+### Architecture
+
+![](./resource/Architecture.png)
+
 * running
 
 ```bash
 $ docker-compose up
 
 $ docker-compose ps  
-     Name                    Command               State            Ports          
+
+     Name                    Command               State            Ports
 -----------------------------------------------------------------------------------
-api.fastapi.com   uvicorn main:app --host 0. ...   Up      0.0.0.0:4000->80/tcp    
-db.maria.com      docker-entrypoint.sh mariadbd    Up      0.0.0.0:3306->3306/tcp  
+api.fastapi.com   uvicorn main:app --host 0. ...   Up      0.0.0.0:4000->80/tcp
+db.maria.com      docker-entrypoint.sh mariadbd    Up      0.0.0.0:3306->3306/tcp
 db.mongodb.com    docker-entrypoint.sh mongod      Up      0.0.0.0:27017->27017/tcp
+front.react.com   /docker-entrypoint.sh ngin ...   Up      0.0.0.0:80->80/tcp
 ```
 
-4000번 포트로 요청한다 /mariadb, /mongodb
+FastAPI로 실행중인 서버 어플리케이션은 4000번 포트로 요청하며 라우트는 /mariadb, /mongodb가 있다
 
-docker-compose up 시 api 서버 이미지가 없다면 새로 생성한다. 만약 api 서버 코드가 수정되었다면 기존에 생성된 이미지를 지우고 up을 수행한다.
+docker-compose up 시 api, font 이미지가 없다면 생성
 
-api.fastapi.com은 환경변수 api/.product.env을 적용한다
+만약 api, font 코드가 수정되었다면 기존에 생성된 이미지를 지우고 up 수행(docker-compose의 build에 의해 이미지가 없다면 이미지를 생성)
+
+api.fastapi.com은 환경변수 api/.product.env 적용
+
+front.react.com은 환경변수 front/.product.env 적용
 
 * api 서버 로컬 개발모드
 
@@ -47,63 +57,8 @@ $ uvicorn main:app --reload
 $ docker build -t [이미지 이름] ./api
 ```
 
-### mysql
+### 쿼리 
 
-```bash
-$ docker exec -it db.maria.com /bin/bash
+[MariaDB](./mariadb/README.md)
 
-$ mongo -u root -p password
-
->
-```
-
-### mongodb
-
-```bash
-$ docker exec -it db.mongodb.com /bin/bash
-
-$ mongo -u root -p 1234
-
->
-```
-
-* 데이터베이스 변경
-
-```sql
-> use mydb
-```
-
-* 컬렉션 생성
-
-```sql
-> db.createCollection('book')
-```
-
-* 데이터 입력
-
-```sql
-> db.book.insertOne({name:"hello mongo", author:"choi"})
-
-> db.book.insertMany([{name:"hello python", author:"mung0"}, {name:"hello docker", author:"mung1"}])
-```
-
-* 데이터 조회
-
-```sql
-> db.book.find().pretty()
-
-> db.book.find({name:"hello docker"})
-```
-
-* 데이터 업데이트
-
-```sql
-> db.book.updateOne( { _id: ObjectId("61e374779cbbcefe0d6d744d") }, { $set: { author: "mm" } } )
-```
-
-* 데이터 삭제
-
-```sql
-> db.book.deleteOne({name:"hello docker"})
-
-```
+[MongoDB](./mongodb/README.md)
