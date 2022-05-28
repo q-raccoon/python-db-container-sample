@@ -19,6 +19,11 @@ db.mongodb.com    docker-entrypoint.sh mongod      Up      0.0.0.0:27017->27017/
 front.react.com   /docker-entrypoint.sh ngin ...   Up      0.0.0.0:80->80/tcp
 ```
 
+http://localhost
+
+http://localhost/docs
+
+
 FastAPI로 실행중인 서버 어플리케이션은 4000번 포트로 요청하며 라우트는 /mariadb, /mongodb가 있다
 
 docker-compose up 시 api, font 이미지가 없다면 생성
