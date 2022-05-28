@@ -16,6 +16,7 @@ $ docker-compose ps
 api.fastapi.com   uvicorn main:app --host 0. ...   Up      0.0.0.0:4000->80/tcp
 db.maria.com      docker-entrypoint.sh mariadbd    Up      0.0.0.0:3306->3306/tcp
 db.mongodb.com    docker-entrypoint.sh mongod      Up      0.0.0.0:27017->27017/tcp
+db.redis.com      docker-entrypoint.sh redis ...   Up      0.0.0.0:6379->6379/tcp
 front.react.com   /docker-entrypoint.sh ngin ...   Up      0.0.0.0:80->80/tcp
 ```
 
@@ -24,7 +25,7 @@ http://localhost
 http://localhost/docs
 
 
-FastAPI로 실행중인 서버 어플리케이션은 4000번 포트로 요청하며 라우트는 /mariadb, /mongodb가 있다
+FastAPI로 실행중인 서버 어플리케이션은 4000번 포트로 요청하며 라우트는 /mariadb, /mongodb, /redis가 있다. /redis/resources는 RateLimit(10회/1분) 적용
 
 docker-compose up 시 api, font 이미지가 없다면 생성
 

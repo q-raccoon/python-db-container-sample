@@ -8,7 +8,7 @@ const Mongodb = (props) => {
   console.log(data);
   return (
     <div>
-      <h1>Mongodb</h1>
+      <h2>Mongodb</h2>
       <div>
         {data.data.map((item, index) => (
           <div key={index}>

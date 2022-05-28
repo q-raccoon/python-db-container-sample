@@ -6,8 +6,9 @@ from fastapi import FastAPI
 from typing import Union
 
 from database.mariadb import engine as mariadb_engine, Base as mariadb_Base
+from database.redis import set_client, discard_client
 
-from router import db_mariadb as db_mariadb_router, db_mongodb as db_mongodb_router
+from router import db_mariadb as db_mariadb_router, db_mongodb as db_mongodb_router, db_redis as db_redis_router
 
 mariadb_Base.metadata.create_all(bind=mariadb_engine)
 
@@ -25,9 +26,12 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-
 app.include_router(db_mariadb_router.router, prefix="/mariadb", tags=["mariadb"])
 app.include_router(db_mongodb_router.router, prefix="/mongodb", tags=["mongodb"])
+app.include_router(db_redis_router.router, prefix="/redis", tags=["redis"])
+
+app.add_event_handler('startup', set_client)
+app.add_event_handler('shutdown', discard_client)
 
 @app.get("/")
 def read_root():

@@ -5,7 +5,7 @@ const Mariadb = (props) => {
 
   return (
     <div>
-      <h1>Mariadb</h1>
+      <h2>Mariadb</h2>
       <div>
         {data.map((item, index) => (
           <div key={index}>
