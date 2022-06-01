@@ -21,9 +21,9 @@ db.redis.com         docker-entrypoint.sh redis ...   Up      0.0.0.0:6379->6379
 front.react.com      /docker-entrypoint.sh ngin ...   Up      0.0.0.0:80->80/tcp 
 ```
 
-http://localhost
+http://127.0.0.1
 
-http://localhost/docs
+http://127.0.0.1/docs
 
 api.fastapi.com와 api.prediction.com은 front.react.com에서 동작중인 nginx에서 L7 수준에서 라우팅 된다.
 
