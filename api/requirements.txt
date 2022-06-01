@@ -7,3 +7,6 @@ pymysql==1.0.2
 motor==2.5.1
 pymongo==3.12.3
 aioredis==2.0.1
+alembic==1.7.7
+psycopg2-binary==2.9.3
+SQLAlchemy-Utils==0.38.2
