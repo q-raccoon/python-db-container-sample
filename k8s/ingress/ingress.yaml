@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: mung-ingress
+  # namespace: asdf
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    # ingress.kubernetes.io/rewrite-target: /
+    # kubernetes.io/ingress.class: nginx
+    #ingress.bluemix.net/rewrite-path: "serviceName=app-service rewrite=/"
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: mung.tes
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: api-service
+            port:
+              number: 4000

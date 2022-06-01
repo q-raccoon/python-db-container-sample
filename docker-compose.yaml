@@ -59,6 +59,5 @@ services:
     ports:
       - 80:80
     restart: always
-    env_file: ./front/.product.env
     depends_on:
       - api.fastapi.com

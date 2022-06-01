@@ -1,0 +1,108 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api
+  labels:
+    app: fastapi
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: fastapi
+  template:
+    metadata:
+      labels:
+        app: fastapi
+    spec:
+      containers:
+      - name: fastapi
+        image: pjt3591oo/fastapi-tutorial:0.1
+        # image: python:3.8
+        imagePullPolicy: IfNotPresent
+        ports:
+          - containerPort: 80
+        command: ["uvicorn", 'main:app', '--host', '0.0.0.0', '--port', '80']
+        env:
+          - name: MYSQL_HOST
+            valueFrom:
+              secretKeyRef:
+                name: api-secret
+                key: MYSQL_HOST
+          - name: MYSQL_PORT
+            valueFrom:
+              secretKeyRef:
+                name: api-secret
+                key: MYSQL_PORT
+          - name: MYSQL_ROOT_USER
+            valueFrom:
+              secretKeyRef:
+                name: api-secret
+                key: MYSQL_ROOT_USER
+          - name: MYSQL_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: api-secret
+                key: MYSQL_ROOT_PASSWORD
+          - name: MYSQL_DATABASE
+            valueFrom:
+              secretKeyRef:
+                name: api-secret
+                key: MYSQL_DATABASE
+          - name: MONGODB_HOST
+            valueFrom:
+              secretKeyRef:
+                name: api-secret
+                key: MONGODB_HOST
+          - name: MONGODB_PORT
+            valueFrom:
+              secretKeyRef:
+                name: api-secret
+                key: MONGODB_PORT
+          - name: MONGODB_DATABASE
+            valueFrom:
+              secretKeyRef:
+                name: api-secret
+                key: MONGODB_DATABASE
+          - name: MONGODB_USER
+            valueFrom:
+              secretKeyRef:
+                name: api-secret
+                key: MONGODB_USER
+          - name: MONGODB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: api-secret
+                key: MONGODB_PASSWORD
+          - name: REDIS_HOST
+            valueFrom:
+              secretKeyRef:
+                name: api-secret
+                key: REDIS_HOST
+          - name: REDIS_PORT
+            valueFrom:
+              secretKeyRef:
+                name: api-secret
+                key: REDIS_PORT
+          - name: REDIS_DATABASE
+            valueFrom:
+              secretKeyRef:
+                name: api-secret
+                key: REDIS_DATABASE
+          - name: REDIS_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: api-secret
+                key: REDIS_PASSWORD
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: api-service
+spec:
+  ports:
+    - port: 4000
+      targetPort: 80
+      nodePort: 31000
+  selector:
+    app: fastapi
+  type: NodePort
