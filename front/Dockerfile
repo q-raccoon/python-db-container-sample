@@ -3,6 +3,7 @@ WORKDIR /app
 COPY ./package.json ./
 RUN npm install
 COPY . .
+RUN mv .product.env .env
 RUN npm run build
 
 FROM nginx

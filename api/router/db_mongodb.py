@@ -2,8 +2,6 @@ from fastapi import APIRouter
 
 from database.mongodb import db
 
-# from models.mongodb import Classification, Movie
-
 from schemas.mongodb import UserBase
 
 router = APIRouter()

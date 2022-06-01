@@ -50,6 +50,16 @@ services:
       - db.maria.com
       - db.mongodb.com
       - db.redis.com
+      - api.prediction.com
+
+  api.prediction.com:
+    container_name: api.prediction.com
+    build: 
+      context: ./cnn-serve
+    ports: 
+      - 4100:80
+    restart: always
+    env_file: ./api/.product.env
 
   front.react.com:
     container_name: front.react.com
@@ -61,3 +71,4 @@ services:
     restart: always
     depends_on:
       - api.fastapi.com
+      - api.prediction.com

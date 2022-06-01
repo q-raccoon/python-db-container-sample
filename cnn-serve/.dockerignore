@@ -1,0 +1,4 @@
+cnn_image
+__pycache__
+.env
+.product.env
