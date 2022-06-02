@@ -34,7 +34,8 @@ async def create_file(file: bytes = File(...)):
 async def predict_image(file: UploadFile = File(...)):
   
   pixels = await raw_to_pixel(file)
-  prediction = model.predict(np.array([pixels]))
+
+  prediction = model.predict(np.array([pixels / 255]) )
   label = int(prediction[0].argmax())
   name = label_to_class(label)
 
