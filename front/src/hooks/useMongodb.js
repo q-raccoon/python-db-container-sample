@@ -10,7 +10,7 @@ const useMongodb = () => {
   }, [])
 
   const fetchData = async () => {
-    const url = `${HOST}/mongodb`
+    const url = `${HOST}/api/mongodb`
     const res = await fetch(url)
     const data = await res.json()
     setData(data);

@@ -26,9 +26,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(db_mariadb_router.router, prefix="/mariadb", tags=["mariadb"])
-app.include_router(db_mongodb_router.router, prefix="/mongodb", tags=["mongodb"])
-app.include_router(db_redis_router.router, prefix="/redis", tags=["redis"])
+app.include_router(db_mariadb_router.router, prefix="/api/mariadb", tags=["mariadb"])
+app.include_router(db_mongodb_router.router, prefix="/api/mongodb", tags=["mongodb"])
+app.include_router(db_redis_router.router, prefix="/api/redis", tags=["redis"])
 
 app.add_event_handler('startup', set_client)
 app.add_event_handler('shutdown', discard_client)

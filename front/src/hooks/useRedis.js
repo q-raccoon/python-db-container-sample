@@ -6,7 +6,7 @@ const useRedis = () => {
   const [ status, setStatus ] = useState(true);
 
   const fetchData = async () => {
-    const url = `${HOST}/redis/resources`
+    const url = `${HOST}/api/redis/resources`
     try {
       const { ok } = await fetch(url);
       setStatus(ok);

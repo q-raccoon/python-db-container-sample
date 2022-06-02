@@ -10,7 +10,7 @@ const useMariadb = () => {
   }, [])
 
   const fetchData = async () => {
-    const url = `${HOST}/mariadb`
+    const url = `${HOST}/api/mariadb`
     const res = await fetch(url)
     const data = await res.json()
     setData(data);
