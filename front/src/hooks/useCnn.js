@@ -4,19 +4,21 @@ const HOST = process.env.REACT_APP_PREDICTION_SERVER_HOST;
 
 
 const useCnn = () => {
-  const [ file, setFile ] = useState(null);
-  const [predict, setPredict] = useState(null);
+  const [ files, setFiles ] = useState([]);
 
-  const onUploadHandler = () => {
-    fetchData()
+  const onUploadHandler = async (file) => {
+    return await fetchData(file);
   }
 
   const onChangeFile = (e) => {
-    const file = e.target.files[0];
-    setFile(file);
+    setFiles(e.target.files);
   }
 
-  const fetchData = async () => {
+  const handleDrop = (didAcceptFiles) => {
+    setFiles(didAcceptFiles)
+  }
+
+  const fetchData = async (file) => {
     const url = `${HOST}/prediction`
     let formData = new FormData();
     // formData는 파일을 포함할 수 있습니다.
@@ -26,15 +28,15 @@ const useCnn = () => {
       method: 'POST',
       redirect: 'follow',
       body: formData
-    
     })
     const data = await res.json()
-    setPredict(data);
+    console.log(data)
+    return data;
   }
 
   return {
-    file, predict, 
-    onUploadHandler, onChangeFile, 
+    files, 
+    onUploadHandler, onChangeFile, handleDrop
   }
 }
 

@@ -8,9 +8,17 @@ function App() {
 
   return (
     <div>
+      <h1>
+        도커 및 쿠버네티스 서비스를 활용한 MlOps 공부
+      </h1>
+
+      <h2>1. Prediction Server Area </h2>
+
       <div>
         <Cnn />
       </div>
+
+      <h2>2. Api Server Area</h2>
       <div style={{display: 'flex'}} >
         <div style={{width: 350}}>
           <Mongodb />
@@ -22,6 +30,7 @@ function App() {
           <Redisdb />
         </div>
       </div>
+      
     </div>
   );
 }

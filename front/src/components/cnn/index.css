@@ -1,0 +1,20 @@
+.App {
+  font-family: sans-serif;
+}
+
+ul {
+  margin: 0;
+}
+
+strong {
+  display: inline-block;
+  margin-top: 20px;
+}
+
+.dropzone {
+  text-align: center;
+  padding: 20px;
+  border: 3px dashed #eeeeee;
+  background-color: #fafafa;
+  color: #bdbdbd;
+}
