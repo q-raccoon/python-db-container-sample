@@ -14,10 +14,17 @@ spec:
   - host: mung.tes
     http:
       paths:
-      - path: /
+      - path: /api/redis/resources
         pathType: Prefix
         backend:
           service:
             name: api-service
             port:
               number: 4000
+      - path: /prediction/*
+        pathType: Prefix
+        backend:
+          service:
+            name: cnn-serve-service
+            port:
+              number: 4100

@@ -28,8 +28,6 @@ mung-ingress   <none>   www.mung.com   192.168.42.2   80      4m4s
 
 ingress로 등록된 hosts(/etc/hosts에 address로 바인딩) 또는 address로 접속되지 않음. 이때 svc 목록 조회시 80:포트/TCP에서 포트로 접속하면 ingress의 80으로 트래픽이 전달됨
 
-나의 환경에서 정상적으로 실행되지 않아 ingress-nginx의 pod을 직접 포워딩을 건다.
-
 ```
 $ kubectl get pod -n ingress-nginx
 NAME                                       READY   STATUS      RESTARTS   AGE
