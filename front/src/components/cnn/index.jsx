@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react';
-import useCnn from "../../hooks/useCnn";
-import Dropzone from "react-dropzone";
-import './index.css'
-import Img from './img';
-import 'chart.js/auto';
 import { Doughnut } from 'react-chartjs-2';
+import Dropzone from "react-dropzone";
+import 'chart.js/auto';
 
 import { MATCH_COLOR, NOT_MATCH_COLOR } from './color';
+import useCnn from "../../hooks/useCnn";
+import Img from './img';
+
+import './index.css'
+
 
 const Cnn = () => {
   const {
@@ -113,10 +115,10 @@ const Cnn = () => {
           <div>
             <Doughnut data={data} options={options} />
             <div>
-              <span style={{color: MATCH_COLOR}}> match: {matchCnt} ({(matchCnt / (matchCnt + notMatchCnt) * 100).toFixed(2)}%) </span>
+              <span style={{color: MATCH_COLOR}}> match: {matchCnt} ({((matchCnt / (matchCnt + notMatchCnt) * 100 || 0)).toFixed(2) || 0}%) </span>
             </div>
             <div>
-              <span style={{color: NOT_MATCH_COLOR}}> not Match: {notMatchCnt} ({(notMatchCnt / (matchCnt + notMatchCnt) * 100).toFixed(2)}%) </span>
+              <span style={{color: NOT_MATCH_COLOR}}> not Match: {notMatchCnt} ({((notMatchCnt / (matchCnt + notMatchCnt) * 100) || 0 ).toFixed(2) }%) </span>
             </div>
           </div>
         </div>

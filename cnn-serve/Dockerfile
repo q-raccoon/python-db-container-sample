@@ -13,4 +13,4 @@ WORKDIR /code/app
 
 CMD ["uvicorn", "server:app", "--host", "0.0.0.0", "--port", "80"]
 
-# pjt3591oo/cnn-serve-tutorial
+# pjt3591oo/cnn-serve-tutorial:0.2

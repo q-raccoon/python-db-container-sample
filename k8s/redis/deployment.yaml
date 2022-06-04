@@ -20,11 +20,13 @@ spec:
           ports:
             - containerPort: 6379
           env:
-            - name: REDIS_PASSWORD 
-              valueFrom: 
-                secretKeyRef:
-                  name: redis-secret
-                  key: redis-root-password
+            - name: ALLOW_EMPTY_PASSWORD
+              value: "yes"
+            # - name: REDIS_PASSWORD 
+            #   valueFrom: 
+            #     secretKeyRef:
+            #       name: redis-secret
+            #       key: redis-root-password
 ---
 apiVersion: v1
 kind: Service

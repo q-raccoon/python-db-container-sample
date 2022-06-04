@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: fastapi
-        image: pjt3591oo/fastapi-tutorial:0.1
+        image: pjt3591oo/fastapi-tutorial:0.2
         # image: python:3.8
         imagePullPolicy: IfNotPresent
         ports:

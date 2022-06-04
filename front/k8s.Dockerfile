@@ -8,5 +8,8 @@ RUN npm run build
 
 FROM nginx
 EXPOSE 80
-COPY ./nginx.conf /etc/nginx/conf.d/default.conf
+COPY ./nginx.k8s.conf /etc/nginx/conf.d/default.conf
 COPY --from=builder /app/build /usr/share/nginx/html
+
+# docker build -t pjt3591oo/cnn-client-tutorial:0.1 -f k8s.Dockerfile .
+# pjt3591oo/cnn-client-tutorial:0.1 

@@ -25,9 +25,9 @@ class Prediction(BaseModel):
     label: int
     name: str
 
-@app.post("/files/")
-async def create_file(file: bytes = File(...)):
-  return {"file_size": len(file)}
+@app.get('/version')
+async def get_version():
+  return '0.2'
 
 
 @app.post("/prediction", response_model=Prediction)

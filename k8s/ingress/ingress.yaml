@@ -26,6 +26,13 @@ spec:
             name: cnn-serve-service
             port:
               number: 4100
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: cnn-client-service
+            port:
+              number: 4200
 ---
 kind: Service
 apiVersion: v1

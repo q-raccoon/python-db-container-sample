@@ -1,36 +1,36 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: cnn-serve
+  name: cnn-client
   labels:
-    app: cnn-serve
+    app: cnn-client
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
-      app: cnn-serve
+      app: cnn-client
   template:
     metadata:
       labels:
-        app: cnn-serve
+        app: cnn-client
     spec:
       containers:
-      - name: cnn-serve
-        image: pjt3591oo/cnn-serve-tutorial:0.2
+      - name: cnn-client
+        image: pjt3591oo/cnn-client-tutorial:0.2
         imagePullPolicy: IfNotPresent
         ports:
           - containerPort: 80
-        command: ["uvicorn", "server:app", "--host", "0.0.0.0", "--port", "80"]
+        # command: ["uvicorn", "server:app", "--host", "0.0.0.0", "--port", "80"]
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: cnn-serve-service
+  name: cnn-client-service
 spec:
   ports:
-    - port: 4100
+    - port: 4200
       targetPort: 80
-      nodePort: 32000
+      nodePort: 32100
   selector:
-    app: cnn-serve
+    app: cnn-client
   type: NodePort

@@ -4,7 +4,8 @@
 # nginx ingress controller는 퍼블릭 환경이 아니면 bare metal을 설치해야한다고 한다.
 # 만약 minikube 환경이라면 ingress-controller는 minikube addons enable ingress를 통해 생성한다
 $ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.2.0/deploy/static/provider/baremetal/deploy.yaml
-# minikube 환경일 때
+
+# minikube 환경이라면 addons를 활성화해도 된다.
 # $ minikube addons enable ingress
 
 # ingress에 바인딩 되어있는 포트 확인
