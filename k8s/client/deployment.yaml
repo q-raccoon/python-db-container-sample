@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: cnn-client
-        image: pjt3591oo/cnn-client-tutorial:0.2
+        image: pjt3591oo/cnn-client-tutorial:0.3
         imagePullPolicy: IfNotPresent
         ports:
           - containerPort: 80
