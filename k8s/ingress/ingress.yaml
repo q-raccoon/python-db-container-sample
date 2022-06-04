@@ -1,30 +1,43 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: mung-ingress
-  # namespace: asdf
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
-    # ingress.kubernetes.io/rewrite-target: /
-    # kubernetes.io/ingress.class: nginx
-    #ingress.bluemix.net/rewrite-path: "serviceName=app-service rewrite=/"
+    nginx.ingress.kubernetes.io/upstream-hash-by: "$arg_predictorid"
+    nginx.ingress.kubernetes.io/upstream-hash-by-subset: "true"
+    nginx.ingress.kubernetes.io/upstream-hash-by-subset-size: "3"
+  name: mung-ingress
+  namespace: default
 spec:
   ingressClassName: nginx
   rules:
-  - host: mung.tes
-    http:
+  - http:
       paths:
-      - path: /api/redis/resources
+      - path: /api
         pathType: Prefix
         backend:
           service:
             name: api-service
             port:
               number: 4000
-      - path: /prediction/*
+      - path: /prediction
         pathType: Prefix
         backend:
           service:
             name: cnn-serve-service
             port:
               number: 4100
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: mung-ingress-service
+  labels:
+    app: mung-ingress-service
+spec:
+  selector:
+    app: mung-ingress
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80
+
