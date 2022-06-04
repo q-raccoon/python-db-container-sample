@@ -27,13 +27,13 @@ services:
     
   db.redis.com:
     container_name: db.redis.com
-    image: redis:alpine
+    image: bitnami/redis:latest
     ports:
       - 6379:6379
     volumes:
       - ./redis/data:/data
-      - ./conf/redis.conf:/usr/local/conf/redis.conf
-    command: redis-server /usr/local/conf/redis.conf
+      - ./redis/conf/redis.conf:/usr/local/etc/redis/redis.conf
+    command: redis-server /usr/local/etc/redis/redis.conf
     env_file: ./redis/.env
     restart: always
 
