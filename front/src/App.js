@@ -8,25 +8,23 @@ function App() {
 
   return (
     <div>
-      <h1>
-        도커 및 쿠버네티스 서비스를 활용한 MlOps 공부
-      </h1>
+      <h1> 도커 및 쿠버네티스 서비스를 활용한 MlOps 공부 </h1>
 
-      <h2>1. Prediction Server Area </h2>
+      <h2 >1. Prediction Server Area (/Prediction) </h2>
 
       <div>
         <Cnn />
       </div>
 
-      <h2>2. Api Server Area</h2>
-      <div style={{display: 'flex'}} >
-        <div style={{width: 350}}>
+      <h2>2. Api Server Area (/api)</h2>
+      <div className="flex" >
+        <div className="w-350px">
           <Mongodb />
         </div>
-        <div style={{width: 350}}>
+        <div className="w-350px">
           <Mariadb />
         </div>
-        <div style={{width: 350}}>
+        <div className="w-350px">
           <Redisdb />
         </div>
       </div>

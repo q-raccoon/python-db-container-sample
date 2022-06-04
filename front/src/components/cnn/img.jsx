@@ -34,17 +34,12 @@ const Img = ({file, onUploadHandler, onMatch, onNotMatch}) => {
   }
 
   return (
-    <>
-      <table>
-        <tr>
-          <td style={{width: 120, height: 54}}><img src={img} alt="preview" /></td>
-          <td style={{width: 120, height: 54, color: getColor()}}><span>{file.name}</span></td>
-          <td style={{width: 120, height: 54}}><button onClick={() => onPredictHandler(file)} >예측</button></td>
-          <td style={{width: 120, height: 54, color: getColor()}}><span>예측결과<br />{predict?.name}</span></td>
-        </tr>
-      </table>
-    </>
-
+    <div className="grid grid-cols-4 gap-12 pd-3 pb-3 items-center">
+      <img src={img} alt="preview" className="rounded-full w-24" />
+      <button style={{background: getColor()}} onClick={() => onPredictHandler(file)} disabled={predict?.name}>예측</button>
+      <div style={{color: getColor()}}>{file.name}</div>
+      <div style={{color: getColor()}}>{predict?.name}</div>
+    </div>
   )
 }
 

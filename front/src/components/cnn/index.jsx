@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Doughnut } from 'react-chartjs-2';
 import Dropzone from "react-dropzone";
 import 'chart.js/auto';
@@ -6,9 +6,6 @@ import 'chart.js/auto';
 import { MATCH_COLOR, NOT_MATCH_COLOR } from './color';
 import useCnn from "../../hooks/useCnn";
 import Img from './img';
-
-import './index.css'
-
 
 const Cnn = () => {
   const {
@@ -84,8 +81,9 @@ const Cnn = () => {
 
   return (
     <>
-      <h3>이미지 분류 모델 테스트를 수행합니다</h3>
-      <span>사용 가능한 이미지는 <a href="https://www.cs.toronto.edu/~kriz/cifar.html">여기서</a> 확인가능합니다.</span>
+      <span>이미지 분류 모델 테스트를 수행합니다</span>
+      <br />
+      <span>사용 가능한 이미지는 <a className="underline" href="https://www.cs.toronto.edu/~kriz/cifar.html">여기서</a> 확인가능합니다.</span>
       <Dropzone
         onDrop={handleDrop}
         accept="image/*"
@@ -101,17 +99,17 @@ const Cnn = () => {
         )}
       </Dropzone>
 
-      <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center' }}>
-        <div style={{ height: 500, overflowY: 'scroll', padding: 10, border: '1px solid #e3e3e3' }}>
-          <h3>이미지 분류 결과 - 업로드 된 이미지 분류 결과를 확인할 수 있습니다.</h3>
-          {files.map((file, idx) => (
-            <div key={file.name}>
+      <div className="flex justify-around items-center" >
+        <div className="overflow-y-scroll p-3 h-500px border">
+          <span>이미지 분류 결과 - 업로드 된 이미지 분류 결과를 확인할 수 있습니다.</span>
+          {files.map(file => (
+            <React.Fragment key={file.name}>
               <Img file={file} onUploadHandler={onUploadHandler} onMatch={onMatch} onNotMatch={onNotMatch} />
-            </div>
+            </React.Fragment>
           ))}
         </div>
 
-        <div style={{ height: 500}}>
+        <div className="h-500px flex items-center">
           <div>
             <Doughnut data={data} options={options} />
             <div>
@@ -123,7 +121,6 @@ const Cnn = () => {
           </div>
         </div>
       </div>
-
     </>
   )
 }
