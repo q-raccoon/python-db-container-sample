@@ -1,10 +1,10 @@
 # 컨테이너 기반 FastAPI 디비연동
 
-### Architecture
+## Architecture
 
 ![](./resource/Architecture.png)
 
-##### k8s 실행
+### k8s 실행
 
 ```bash
 $ cd k8s
@@ -60,7 +60,7 @@ $ sudo kubectl port-forward -n ingress-nginx svc/ingress-nginx-controller -n ing
 
 localhost:80으로 접속하면 접속이 가능하다.
 
-##### docker-compose 실행
+### docker-compose 실행
 
 * running
 
