@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cnn-serve
+  labels:
+    app: cnn-serve
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: cnn-serve
+  template:
+    metadata:
+      labels:
+        app: cnn-serve
+    spec:
+      containers:
+      - name: cnn-serve
+        image: pjt3591oo/cnn-serve-tutorial:0.2
+        imagePullPolicy: IfNotPresent
+        ports:
+          - containerPort: 80
+        command: ["uvicorn", "server:app", "--host", "0.0.0.0", "--port", "80"]

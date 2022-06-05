@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: cnn-serve-service
+spec:
+  ports:
+    - port: 4100
+      targetPort: 80
+      nodePort: 32000
+  selector:
+    app: cnn-serve
+  type: NodePort

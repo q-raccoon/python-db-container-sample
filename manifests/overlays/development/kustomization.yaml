@@ -1,0 +1,28 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+images:
+- name: cnn-serve
+  newName: pjt3591oo/cnn-serve-tutorial:0.4
+
+resources:
+- ../../base
+
+# patchesStrategicMerge:
+#   - path-image.yaml
+
+
+
+# images:
+# - name: pjt3591oo/cnn-serve-tutorial:0.2
+#   newName: pjt3591oo/cnn-serve-tutorial
+#   newTag: 0.5
+  # newTag: 0.5
+  # newTag:
+# patchesJson6902:
+#   - target: 
+#       group: apps
+#       kind: Deployment
+#       name: cnn-serve
+#     path: patch-image.yaml
+

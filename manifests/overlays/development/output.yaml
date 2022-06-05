@@ -1,0 +1,42 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: cnn-serve-service
+spec:
+  ports:
+  - nodePort: 32000
+    port: 4100
+    targetPort: 80
+  selector:
+    app: cnn-serve
+  type: NodePort
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: cnn-serve
+  name: cnn-serve
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: cnn-serve
+  template:
+    metadata:
+      labels:
+        app: cnn-serve
+    spec:
+      containers:
+      - command:
+        - uvicorn
+        - server:app
+        - --host
+        - 0.0.0.0
+        - --port
+        - "80"
+        image: pjt3591oo/cnn-serve-tutorial:0.2
+        imagePullPolicy: IfNotPresent
+        name: cnn-serve
+        ports:
+        - containerPort: 80

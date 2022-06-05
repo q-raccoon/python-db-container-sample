@@ -1,0 +1,62 @@
+name: Build and Push Docker Image
+on:
+  push:
+    branches:
+      - dev
+env:
+  DOCKER_USERNAME: ${{secrets.DOCKER_USERNAME}}
+  DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
+  DOCKER_REPONAME: ${{secrets.DOCKER_REPONAME}}
+
+jobs:
+  push-image-to-docker-hub:  # 도커빌드 및 후시
+    runs-on: ubuntu-latest  # runner name : (ubuntu latest version) 
+    steps:
+    - uses: actions/checkout@v2 # first action : checkout source code
+    - name: docker login
+      run: | # log into docker hub account
+        docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD  
+    - name: Build the Docker image # push The image to the docker hub
+      run: cd cnn-serve && docker build . --file Dockerfile --tag $DOCKER_USERNAME/$DOCKER_REPONAME:${GITHUB_SHA::6}
+    - name: Docker Push
+      run: docker push $DOCKER_USERNAME/$DOCKER_REPONAME:${GITHUB_SHA::6}
+
+  k8s-manifests-update:
+    runs-on: ubuntu-latest
+    needs: push-image-to-docker-hub # push-image-to-docker-hub 이후에 실행됨
+
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v3
+
+
+    - name: Setup Kustomize
+      uses: imranismail/setup-kustomize@v1
+      with:
+        kustomize-version: "3.6.1"
+
+    - name: Kubernetes resources update
+      env:
+        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        DOCKER_REPONAME: ${{ secrets.DOCKER_REPONAME}}
+      run: |
+       cd manifests/cnn-serve
+       echo -e "start update\n"
+       kustomize edit set image $DOCKER_USERNAME/$DOCKER_REPONAME:${GITHUB_SHA::6}
+       kustomize build . -o ../../k8s/cnn-serve/deployment.yaml
+       echo "origin kustomization.yaml "
+       cat kustomization.yaml 
+       echo "udpated deployment.yaml "
+       cat ../../k8s/cnn-serve/deployment.yaml
+    
+    - name: Commit files
+      run: |
+        git config --local user.email "pjt3591oo@gmail.com"
+        git config --local user.name "github"
+        git commit -am "docker image build and update k8s resources - ${GITHUB_SHA::6}"
+
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      env:
+        github_token: ${{ secrets.TOKEN_GITHUB }}
+        branch: ${{ github.ref }}
