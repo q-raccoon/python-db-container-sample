@@ -27,7 +27,7 @@ class Prediction(BaseModel):
 
 @app.get('/version')
 async def get_version():
-  return '0.2'
+  return '0.3'
 
 
 @app.post("/prediction", response_model=Prediction)
