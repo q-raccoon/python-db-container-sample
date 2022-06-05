@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: cnn-serve
+  namespace: default
   labels:
     app: cnn-serve
 spec:
@@ -13,6 +14,7 @@ spec:
     metadata:
       labels:
         app: cnn-serve
+      namespace: default
     spec:
       containers:
       - name: cnn-serve
