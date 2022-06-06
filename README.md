@@ -6,6 +6,12 @@
 
 ### k8s 실행
 
+* kubernetes container structure
+
+![](./resource/k8s_container_structure.png)
+
+* running
+
 ```bash
 $ cd k8s
 
