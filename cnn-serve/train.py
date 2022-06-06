@@ -1,6 +1,6 @@
-import tensorflow as tf
-from tensorflow.keras import datasets, layers, models
-import matplotlib.pyplot as plt
+from model import model
+from tensorflow.keras import datasets
+# import matplotlib.pyplot as plt
 
 '''
 labels
@@ -33,17 +33,6 @@ class_names = ['airplane', 'automobile', 'bird', 'cat', 'deer', 'dog', 'frog', '
 #     # which is why you need the extra index
 #     plt.xlabel(class_names[train_labels[i][0]])
 # plt.show()
-
-model = tf.keras.Sequential([
-  tf.keras.layers.Conv2D(32, (3, 3), activation='relu', input_shape=(32, 32, 3)),
-  tf.keras.layers.MaxPooling2D((2,2)),
-  tf.keras.layers.Conv2D(64, (3, 3), activation='relu'),
-  tf.keras.layers.MaxPooling2D((2, 2)),
-  tf.keras.layers.Conv2D(64, (3, 3), activation='relu'),
-  tf.keras.layers.Flatten(),
-  tf.keras.layers.Dense(64,activation='relu'),
-  tf.keras.layers.Dense(10,activation='softmax')
-])
 
 model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
 
