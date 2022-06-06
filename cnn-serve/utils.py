@@ -1,5 +1,6 @@
 from PIL import Image
 import numpy as np
+import tensorflow as tf
 import io
 
 async def raw_to_pixel(file):
@@ -25,3 +26,6 @@ def label_to_class(label):
   ]
 
   return labels[label]
+
+def load_model():
+  return tf.keras.models.load_model('cifar10_model')
