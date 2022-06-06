@@ -6,5 +6,5 @@ resources:
 
 images:
 - name: pjt3591oo/cnn-serve-tutorial
-  newTag: 22536d
+  newTag: b26270
 kind: Kustomization

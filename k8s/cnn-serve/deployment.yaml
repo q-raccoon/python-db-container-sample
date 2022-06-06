@@ -38,7 +38,7 @@ spec:
         - 0.0.0.0
         - --port
         - "80"
-        image: pjt3591oo/cnn-serve-tutorial:22536d
+        image: pjt3591oo/cnn-serve-tutorial:b26270
         imagePullPolicy: IfNotPresent
         name: cnn-serve
         ports:
