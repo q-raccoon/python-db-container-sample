@@ -1,5 +1,17 @@
 # MlOps 공부
 
+* 사용한 스택
+
+```
+서버 프레임워크: FastAPI
+
+클라이언트: react, tailwind
+
+컨테이너 도구: k8s, kustomize
+
+CI/CD 도구: Argo CD, github actions
+```
+
 ## Architecture
 
 ![](./resource/Architecture.png)
