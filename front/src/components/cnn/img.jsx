@@ -28,7 +28,7 @@ const Img = ({file, onUploadHandler, onMatch, onNotMatch}) => {
 
   const getColor = () => {
     if(!predict?.name) {
-      return 'black';
+      return 'rgb(156, 163, 175)';
     }
     return isMatch() ? MATCH_COLOR : NOT_MATCH_COLOR;
   }
@@ -37,8 +37,8 @@ const Img = ({file, onUploadHandler, onMatch, onNotMatch}) => {
     <div className="grid grid-cols-4 gap-12 pd-3 pb-3 items-center">
       <img src={img} alt="preview" className="rounded-full w-24" />
       <button style={{background: getColor()}} onClick={() => onPredictHandler(file)} disabled={predict?.name}>예측</button>
-      <div style={{color: getColor()}}>{file.name}</div>
-      <div style={{color: getColor()}}>{predict?.name}</div>
+      <div className="text-gray-50" style={{color: getColor()}}>{file.name}</div>
+      <div className="text-gray-50" style={{color: getColor()}}>{predict?.name}</div>
     </div>
   )
 }

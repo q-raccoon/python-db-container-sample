@@ -79,27 +79,35 @@ const Cnn = () => {
     setNotMatchCnt(prev => prev + 1)
   }
 
+  const percent = (value) => {
+    return `${((value / (matchCnt + notMatchCnt) * 100 || 0)).toFixed(2) || 0}%`
+  }
+
   return (
     <>
       <span>이미지 분류 모델 테스트를 수행합니다</span>
       <br />
       <span>사용 가능한 이미지는 <a className="underline" href="https://www.cs.toronto.edu/~kriz/cifar.html">여기서</a> 확인가능합니다.</span>
-      <Dropzone
-        onDrop={handleDrop}
-        accept="image/*"
-        minSize={1024}
-        maxSize={3072000}
-      >
-        {({ getRootProps, getInputProps }) => (
-          <div {...getRootProps({ className: "dropzone" })}>
-            <input {...getInputProps()} />
-            <p>이미지 분류기를 돌릴 이미지를 넣어주세요</p>
-            <p>10개의 라벨 중에서 예측을 수행합니다.</p>
-          </div>
-        )}
-      </Dropzone>
+      
+      <div className="mt-10">
 
-      <div className="flex justify-around items-center" >
+        <Dropzone
+          onDrop={handleDrop}
+          accept="image/*"
+          minSize={1024}
+          maxSize={3072000}
+        >
+          {({ getRootProps, getInputProps }) => (
+            <div {...getRootProps({ className: "dropzone" })}>
+              <input {...getInputProps()} />
+              <p>이미지 분류기를 돌릴 이미지를 넣어주세요</p>
+              <p>10개의 라벨 중에서 예측을 수행합니다.</p>
+            </div>
+          )}
+        </Dropzone>
+      </div>
+
+      <div className="justify-around items-center mt-10 -mx-3 lg:flex items-start" >
         <div className="overflow-y-scroll p-3 h-500px border">
           <span>이미지 분류 결과 - 업로드 된 이미지 분류 결과를 확인할 수 있습니다.</span>
           {files.map(file => (
@@ -109,14 +117,14 @@ const Cnn = () => {
           ))}
         </div>
 
-        <div className="h-500px flex items-center">
+        <div className="h-500px flex items-center justify-center">
           <div>
             <Doughnut data={data} options={options} />
             <div>
-              <span style={{color: MATCH_COLOR}}> match: {matchCnt} ({((matchCnt / (matchCnt + notMatchCnt) * 100 || 0)).toFixed(2) || 0}%) </span>
+              <span style={{color: MATCH_COLOR}}> match: {matchCnt} ({percent(matchCnt)}) </span>
             </div>
             <div>
-              <span style={{color: NOT_MATCH_COLOR}}> not Match: {notMatchCnt} ({((notMatchCnt / (matchCnt + notMatchCnt) * 100) || 0 ).toFixed(2) }%) </span>
+              <span style={{color: NOT_MATCH_COLOR}}> not Match: {notMatchCnt} ({percent(notMatchCnt)})</span>
             </div>
           </div>
         </div>

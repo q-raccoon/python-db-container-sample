@@ -3,20 +3,28 @@ import { useState, useEffect } from 'react';
 const HOST = process.env.REACT_APP_HOST;
 
 const useRedis = () => {
-  const [ status, setStatus ] = useState(true);
+  const [ histories, setHistories ] = useState([]);
 
   const fetchData = async () => {
     const url = `${HOST}/api/redis/resources`
     try {
       const { ok } = await fetch(url);
-      setStatus(ok);
+      addHistory(ok);
     } catch(err) {
-      setStatus(false);
+      addHistory(false);
     }
   }
 
+  const addHistory = (status) => {
+    setHistories(histories => [...histories, {
+      status,
+      host: '127.0.0.1',
+      date: (new Date()).toLocaleDateString()
+    }]);
+  }
+
   return {
-    status, fetchData
+    histories, fetchData
   }
 }
 

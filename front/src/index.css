@@ -2,8 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
 @layer components {
   .shadow-outline {
   
@@ -20,39 +18,42 @@
   .dropzone {
     text-align: center;
     padding: 20px;
-    border: 3px dashed #eeeeee;
-    background-color: #fafafa;
+    border: 2px dashed #bdbdbd;
+    /* background-color: bg-gray-500; */
     color: #bdbdbd;
+    @apply bg-gray-500
   }
 }
 
-h1 {
-  font-size: 2.5rem;
-  font-weight: 700;
-  line-height: 1.2;
-  margin: 0;
-  padding: 0;
-}
-h1 {
-  @apply font-sans break-normal text-gray-900 pt-6 pb-2 text-3xl md:text-4xl
-}
-h2 {
-  @apply font-sans break-normal text-gray-600 pt-6 pb-2 text-2xl md:text-3xl
-}
-h3 {
-  @apply text-lg;
-}
-span{
-  @apply font-bold break-normal text-gray-600 text-sm md:text-base
-}
+@layer base {
+  h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0;
+    padding: 0;
+  }
+  h1 {
+    @apply font-sans break-normal text-gray-400 pt-6 pb-2 text-3xl md:text-4xl
+  }
+  h2 {
+    @apply font-sans break-normal text-gray-400 pt-6 pb-2 text-2xl md:text-3xl
+  }
+  h3 {
+    @apply text-lg;
+  }
+  span{
+    @apply font-bold break-normal text-gray-400 text-sm md:text-base
+  }
+  
+  button {
+    @apply shadow bg-yellow-700 text-white font-bold py-2 px-4 rounded
+  }
+  button:hover {
+    @apply bg-yellow-500
+  } 
+  button:focus {
+    @apply shadow-outline outline-none
+  }
 
-button {
-  @apply shadow bg-yellow-700 text-white font-bold py-2 px-4 rounded
-}
-button:hover {
-  @apply bg-yellow-500
-} 
-button:focus {
-  @apply shadow-outline outline-none
-}
-
+}  
