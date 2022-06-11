@@ -6,3 +6,4 @@ tensorflow==2.9.1
 numpy==1.22.3
 Pillow==9.1.1
 python-multipart==0.0.5
+minio==7.1.8

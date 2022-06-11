@@ -1,3 +1,4 @@
 __pycache__/
 data/
 node_modules
+cifar10_model*.h5

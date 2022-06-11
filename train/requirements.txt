@@ -1,0 +1,4 @@
+python-dotenv==0.20.0
+tensorflow==2.9.1
+numpy==1.22.3
+minio==7.1.8

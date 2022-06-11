@@ -37,6 +37,21 @@ services:
     env_file: ./redis/.env
     restart: always
 
+  db.minio.com:
+    container_name: db.minio.com    
+    image: quay.io/minio/minio
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: admin    
+      MINIO_ROOT_PASSWORD: password    
+    restart: always
+    shm_size: '1gb'  # default는 64MB
+    ports:
+      - "9000:9000"    # minio 서비스 포트
+      - "9001:9001"    # minio 콘솔 포트
+    volumes:
+      - ./minio/data:/data  
+
   api.fastapi.com:
     container_name: api.fastapi.com
     build: 
@@ -72,3 +87,12 @@ services:
     depends_on:
       - api.fastapi.com
       - api.prediction.com
+
+  ml.train.com:
+    container_name: ml.train.com
+    build: 
+      context: ./train
+    # restart: always
+    env_file: ./train/.product.env
+    depends_on:
+      - db.minio.com
