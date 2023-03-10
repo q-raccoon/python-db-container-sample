@@ -1,5 +1,7 @@
 # MlOps 공부
 
+[데모영상](https://www.youtube.com/watch?v=ztRcUE4ErLw&t=91s)
+
 * 사용한 스택
 
 ```
