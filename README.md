@@ -35,8 +35,11 @@ $ ./deploy.sh
 api 파드는 디비와 의존적이기 때문에 STATUS가 ERROR이 될 수 있다. 쿠버네티스는 이를 주기적으로 다시 실행시켜 Running 상태가 된다.
 
 사용중인 이미지는 deployment 이름 / (프로젝트 경로) : (이미지명:버전)
+
 api        (/api)      : pjt3591oo/fastapi-tutorial:0.2
+
 cnn-serve  (/cnn-serve): pjt3591oo/cnn-serve-tutorial:0.2
+
 cnn-client (/front)    : pjt3591oo/cnn-client-tutorial:0.3 
 
 ```bash
